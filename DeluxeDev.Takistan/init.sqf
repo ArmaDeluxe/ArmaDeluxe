@@ -7,7 +7,7 @@ tf_civ_radio_code = tf_west_radio_code;
 StartProgress = false;
 enableSaving[false,false];
 
-life_versionInfo = "Takistan Redux";
+life_versionInfo = "ArmaDeluxe";
 [] execVM "KRON_Strings.sqf";
 [] execVM "core\noMineMarkers.sqf";
 [] execVM "scripts\removeFog.sqf";

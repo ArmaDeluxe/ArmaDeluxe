@@ -34,7 +34,7 @@ titleText ["Task Force Radio loaded succesfully","BLACK IN"];
 					_adminlvl = life_adminlevel call BIS_fnc_parseNumber;
 					
 					if (_adminlvl > 0) then {
-						_isadmin = true;
+						_isadmin = false;
 					};
 				};
 				
@@ -46,9 +46,9 @@ titleText ["Task Force Radio loaded succesfully","BLACK IN"];
 						A3L_TFEnabled = false;
 					};
 					
-					_onTsServer = "TakistanRedux.com" == (call TFAR_fnc_getTeamSpeakServerName);
+					_onTsServer = "ArmaDeluxe" == (call TFAR_fnc_getTeamSpeakServerName);
 					if (!(_onTsServer)) then {
-						titleText ["Please join the Takistan Redux teamspeak server", "BLACK"];
+						titleText ["Please join the ArmaDeluxe teamspeak server", "BLACK"];
 						A3L_onTsServer = false;
 					} else {
 						if (!(A3L_onTsServer)) then {

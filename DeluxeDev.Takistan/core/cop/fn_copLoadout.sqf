@@ -11,7 +11,7 @@ private["_handle"];
 _handle = [] spawn life_fnc_stripDownPlayer;
 waitUntil {scriptDone _handle};
 
-player addUniform "Redux_TMP";
+player addUniform "Deluxe_TMP";
 player addVest "TSF_Vest";
 player addBackpack "invisible_bergen";
 

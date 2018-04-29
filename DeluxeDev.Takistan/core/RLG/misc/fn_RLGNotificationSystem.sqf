@@ -8,7 +8,7 @@
 private ["_title", "_new", "_final", "_i"];
 params ["_msg", "_color"];
 
-_title = "<t align = 'center' shadow = '1' size='1.5' font='TahomaB'>Redux<br />NOTIFICATION SYSTEM</t>";
+_title = "<t align = 'center' shadow = '1' size='1.5' font='TahomaB'>Deluxe<br />NOTIFICATION SYSTEM</t>";
 _new = "<br /><br /><t align = 'center' shadow = '1.1' size='1.1' font='TahomaB'>NEWEST MESSAGE</t>";
 _i = 0;
 _final = "";
