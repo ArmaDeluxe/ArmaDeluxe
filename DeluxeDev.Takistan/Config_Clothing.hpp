@@ -571,7 +571,7 @@ class Clothing {
 			{ "Deluxe_SAS_vest", "SAS Vest", 900, { "", "", -1 } },
 			{ "Deluxe_sascmd_vest", "SAS High Command Vest", 900, { "", "", -1 } },
 			{ "Deluxe_ucorp_vest", "Ucorp Vest", 900, { "", "", -1 } },
-			{ "UMI_Bomb_Vest_Camo", "Suicide Vest", 150000, { "", "", -1 } }
+			{ "UMI_Bomb_Vest_Camo", "Suicide Vest", 300000, { "", "", -1 } }
 		};
 
 		backpacks[] = {
