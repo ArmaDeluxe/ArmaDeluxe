@@ -1,0 +1,346 @@
+author = "Arma Deluxe";
+onLoadName = "ArmaDeluxe - Takistan Life";
+onLoadMission = "Arma Deluxe";
+joinUnassigned = 1;
+respawn = BASE;
+respawndelay = 5;
+disabledAI = 1;
+disableChannels[]={0,1,2,3,4,6};
+enableDebugConsole = 0;
+respawnDialog = 0;
+saving = 0;
+// Memes 'R Us
+showHUD[] = {
+	true,	// Scripted HUD (same as showHUD command)
+	true,	// Vehicle + soldier info
+	false,	// Vehicle radar [HIDDEN]
+	false,	// Vehicle compass [HIDDEN]
+	false,	// Tank direction indicator
+	false,	// Commanding menu
+	true,	// Group Bar
+	true,	// HUD Weapon Cursors
+	true	// Vehicle display panels
+};
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 122;
+};
+
+wreckLimit = 3;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 320;
+corpseLimit = 150;
+corpseRemovalMinTime = 999;
+corpseRemovalMaxTime = 9999;
+
+#include "CfgRemoteExec.hpp"
+#include "dialog\MasterHandler.hpp"
+#include "Config_Master.hpp"
+
+class RscTitles {
+		 class an_hud {
+			idd = -1;
+			fadeout=0;
+			fadein=0;
+			duration = 999999;
+			name = "an_hud";
+			onLoad = "uiNamespace setVariable ['an_hud', _this select 0]";
+
+			class controlsBackground {
+				class an_hud_textBox: RscStructuredTextTest
+				{
+					idc = 1000;
+					text = "CASH: $50000 | BANK: $50000 | POLICE ONLINE: 10 | MEDICS ONLINE: 5 | WEBSITE: WWW.ARMA.NETWORK"; //--- ToDo: Localize;
+					x = -0.6275;
+					y = -0.404;
+					w = 2.275;
+					h = 0.04;
+					colorBackground[] = { 1, 1, 1, 0 };
+					class Attributes {
+						font = "PuristaMedium";
+						color = "#FFFFFF";
+						align = "center";
+						valign = "top";
+						shadow = 0;
+						shadowColor = "#ff0000";
+						size = "2";
+					};
+				};
+			};
+		};
+		class an_alert {
+		idd = 15;
+		fadeout = 1;
+		fadein = 1;
+		duration = 10;
+		name = "an_alerts";
+		onLoad = "uiNamespace setVariable ['an_alert', _this select 0]";
+
+		class controlsBackground {
+			class an_alert_text: RscStructuredTextTest
+			{
+				idc = 1100;
+				x = -0.7;
+				y = -0.14;
+				w = 0.4375;
+				h = 0.68;
+				colorBackground[] = {0,0,0,0};
+				class Attributes {
+				  font = "PuristaMedium";
+				  color = "#FF1A1A";
+				  align = "left";
+				  valign = "top";
+				  shadow = 0;
+				  shadowColor = "#FF1A1A";
+				  size = "3";
+				};
+			};
+		};
+	};
+	#include "dialog\Loading.hpp"
+	#include "dialog\progress.hpp"
+	#include "dialog\hud_nameTags.hpp"
+	#include "dialog\hud_stats.hpp"
+	#include "maverick\talent-tree-modular\gui\_masterTitles.cpp"
+};
+
+
+class CfgFunctions {
+	#include "Functions.hpp"
+	#include "maverick\maverick_functions_master.cpp"
+};
+
+class CfgSounds
+{
+	sounds[] = {};
+	class SirenLong
+	{
+		name = "SirenLong";
+		sound[] = {"@rlgsndimg\snds\Siren_Long.ogg", 1, 1};
+		titles[] = {};
+	};
+
+	class medicSiren
+	{
+		name = "medicSiren";
+		sound[] = {"@rlgsndimg\snds\medic_siren.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+    class welcome
+	{
+		name = "welcome";
+		sound[] = {"@rlgsndimg\snds\welcome.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class mining
+	{
+		name = "mining";
+		sound[] = {"@rlgsndimg\snds\mining.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class harvest
+	{
+		name = "harvest";
+		sound[] = {"@rlgsndimg\snds\harvest.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class cuff
+	{
+		name = "cuff";
+		sound[] = {"@rlgsndimg\snds\cuff.ogg", 1, 1};
+		titles[] = {};
+	};
+		class Repair
+	{
+		name = "Repair";
+		sound[] = {"@rlgsndimg\snds\repair.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class checkpointalarm
+	{
+		name = "checkpointalarm";
+		sound[] = {"@rlgsndimg\snds\checkpointalarm.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class tieup
+	{
+		name = "tieup";
+		sound[] = {"@rlgsndimg\snds\tieup.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class blindfold
+	{
+		name = "blindfold";
+		sound[] = {"@rlgsndimg\snds\blindfold.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class drink
+	{
+		name = "drink";
+		sound[] = {"@rlgsndimg\snds\drink.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class eat
+	{
+		name = "eat";
+		sound[] = {"@rlgsndimg\snds\eat.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class panic
+	{
+		name = "panic";
+		sound[] = {"@rlgsndimg\snds\panic.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class bank
+	{
+		name = "bank";
+		sound[] = {"@rlgsndimg\snds\bank.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+
+	class AirRaidSirenAlert
+	{
+		name = "AirRaidSirenAlert";
+		sound[] = {"@rlgsndimg\snds\AirRaidSirenAlert.ogg",1.0,1};
+		titles[] = {};
+	};
+
+	class red
+	{
+		name = "red";
+		sound[] = {"@rlgsndimg\snds\red.ogg",1.0,1};
+		titles[] = {};
+	};
+
+	class ems_horn
+	{
+		name = "ems_horn";
+		sound[] = {"@rlgsndimg\snds\ems_horn.ogg",1.0,1};
+		titles[] = {};
+	};
+};
+
+class CfgDebriefing
+{
+	class Blacklisted
+	{
+		title = "Mission Failed";
+		subtitle = "You are blacklisted from cops";
+		description = "You are not allowed to be a cop due to previous actions and the admins have removed you from being a cop.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class TooManyCops
+	{
+		title = "Mission Failed";
+		subtitle = "There are too many police on duty!";
+		description = "There are currently too many officers patrolling, please try come back when their are less on duty.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class SpyGlass
+	{
+		title = "The SpyGlass sees you";
+		subTitle = "You were detected by the SpyGlass";
+		description = "You were detected for cheating and have been reported to the server. Enjoy your day.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+};
+
+class CfgNotifications
+{
+	class MedicalRequestEmerg
+	{
+		title = "EMS Requested";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+
+	class DeliveryAssigned
+	{
+		title = "Delivery Job Accepteed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+
+	class DeliveryFailed
+	{
+		title = "Delivery Job Failed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+
+	class DeliverySucceeded
+	{
+		title = "Delivery Job Completed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+
+	class TextMessage
+	{
+		title = "Received A Text Message";
+		iconPicture = "\rlgsndimg\icons\ico_messageNew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class PoliceDispatch
+	{
+		title = "911 Dispatch Center";
+		iconPicture = "\rlgsndimg\icons\ico_messagePolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminDispatch
+	{
+		title = "Admin Dispatch Center";
+		iconPicture = "\rlgsndimg\icons\ico_messageAdmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminMessage
+	{
+		title = "Admin Message";
+		iconPicture = "\rlgsndimg\icons\ico_messageAdmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+};
+#include "infiSTAR_AdminMenu.hpp"
+#include "maverick\maverick_master.cpp"

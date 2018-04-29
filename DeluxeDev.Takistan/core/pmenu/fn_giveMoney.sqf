@@ -1,0 +1,39 @@
+#include "..\..\script_macros.hpp"
+/*
+	File: fn_giveMoney.sqf
+	Author: Bryan "Tonic" Boardwine
+	
+	Description:
+	Gives the selected amount of money to the selected player.
+*/
+private["_unit","_amount"];
+_amount = ctrlText 2018;
+ctrlShow[20055,false];
+if((lbCurSel 2100) == -1) exitWith {hint "No one was selected!";ctrlShow[20055,true];};
+_unit = lbData [2100,lbCurSel 2100];
+_unit = call compile format["%1",_unit];
+if(isNil "_unit") exitWith {ctrlShow[20055,true];};
+if(_unit == player) exitWith {ctrlShow[20055,true];};
+if(isNull _unit) exitWith {ctrlShow[20055,true];};
+
+//A series of checks *ugh*
+if(!life_use_atm) exitWith {hint "You recently robbed the bank! You can't give money away just yet.";ctrlShow[20055,true];};
+if(!([_amount] call TON_fnc_isnumber)) exitWith {hint "You didn't enter an actual number format.";ctrlShow[20055,true];};
+if(parseNumber(_amount) <= 0) exitWith {hint "You need to enter an actual amount you want to give.";ctrlShow[20055,true];};
+if(parseNumber(_amount) > CASH) exitWith {hint "You don't have that much to give!";ctrlShow[20055,true];};
+if(isNull _unit) exitWith {ctrlShow[20055,true];};
+if(isNil "_unit") exitWith {ctrlShow[20055,true]; hint "The selected player is not within range";};
+if(CASH == 0) exitWith {
+["<t size='3.2' color='#e57300'>You have no money to give!</t>"] call life_fnc_alerttwo;
+closeDialog 1;
+};
+
+hint format["You gave $%1 to %2",[(parseNumber(_amount))] call life_fnc_numberText,_unit getVariable["realname",name _unit]];
+closeDialog 1;
+CASH = CASH - (parseNumber(_amount));
+
+[0] call SOCK_fnc_updatePartial;
+[_unit,_amount,player] remoteExecCall ["life_fnc_receiveMoney",_unit];
+[] call life_fnc_p_updateMenu;
+
+ctrlShow[20055,true];
